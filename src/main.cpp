@@ -79,6 +79,7 @@ int main() {
     });
 
     std::cout << "Server running on http://localhost:8080\n";
+    svr.set_mount_point("/", "../public");
     svr.listen("0.0.0.0", 8080);
 
     return 0;

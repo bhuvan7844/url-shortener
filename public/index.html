@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>URL Shortener</title>
+<style>
+  * { box-sizing: border-box; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    background: linear-gradient(135deg, #6366f1 0%, #8b5cf6 100%);
+    min-height: 100vh;
+    margin: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .card {
+    background: #ffffff;
+    width: 100%;
+    max-width: 480px;
+    padding: 40px;
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+  }
+
+  h2 {
+    margin: 0 0 8px;
+    font-size: 26px;
+    color: #1f2937;
+  }
+
+  .subtitle {
+    margin: 0 0 28px;
+    color: #6b7280;
+    font-size: 14px;
+  }
+
+  input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 15px;
+    border: 1px solid #d1d5db;
+    border-radius: 10px;
+    outline: none;
+    transition: border-color 0.15s ease, box-shadow 0.15s ease;
+  }
+
+  input:focus {
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  }
+
+  button {
+    width: 100%;
+    padding: 14px;
+    font-size: 15px;
+    font-weight: 600;
+    margin-top: 14px;
+    cursor: pointer;
+    border: none;
+    border-radius: 10px;
+    background: #6366f1;
+    color: #fff;
+    transition: background 0.15s ease, transform 0.1s ease;
+  }
+
+  button:hover { background: #4f46e5; }
+  button:active { transform: scale(0.98); }
+
+  #result {
+    margin-top: 24px;
+    padding: 18px;
+    background: #f3f4ff;
+    border: 1px solid #e0e0ff;
+    border-radius: 10px;
+    display: none;
+    animation: fadeIn 0.25s ease;
+    font-size: 14px;
+    color: #374151;
+  }
+
+  #result a {
+    word-break: break-all;
+    color: #4f46e5;
+    font-weight: 600;
+    text-decoration: none;
+  }
+
+  #result a:hover { text-decoration: underline; }
+
+  .label {
+    color: #6b7280;
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    margin-bottom: 4px;
+  }
+
+  .row { margin-bottom: 14px; }
+  .row:last-child { margin-bottom: 0; }
+
+  #error {
+    color: #dc2626;
+    margin-top: 14px;
+    font-size: 14px;
+    display: none;
+    background: #fef2f2;
+    border: 1px solid #fecaca;
+    padding: 12px 14px;
+    border-radius: 10px;
+  }
+
+  @keyframes fadeIn {
+    from { opacity: 0; transform: translateY(-6px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+</style>
+</head>
+<body>
+  <div class="card">
+    <h2>URL Shortener</h2>
+    <p class="subtitle">Paste a long link below and get a short one instantly.</p>
+
+    <input type="text" id="urlInput" placeholder="https://example.com/very/long/path">
+    <button onclick="shorten()">Shorten</button>
+
+    <div id="result">
+      <div class="row">
+        <div class="label">Short URL</div>
+        <a id="shortLink" href="#" target="_blank"></a>
+      </div>
+      <div class="row">
+        <div class="label">Clicks</div>
+        <span id="clicks">0</span>
+      </div>
+    </div>
+    <div id="error"></div>
+  </div>
+
+  <script>
+    async function shorten() {
+      const url = document.getElementById('urlInput').value;
+      const resultDiv = document.getElementById('result');
+      const errorDiv = document.getElementById('error');
+      resultDiv.style.display = 'none';
+      errorDiv.style.display = 'none';
+
+      try {
+        const res = await fetch('/shorten', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ url })
+        });
+
+        const data = await res.json();
+
+        if (!res.ok) {
+          errorDiv.textContent = data.error || 'Something went wrong';
+          errorDiv.style.display = 'block';
+          return;
+        }
+
+        document.getElementById('shortLink').href = data.short_url;
+        document.getElementById('shortLink').textContent = data.short_url;
+        resultDiv.style.display = 'block';
+      } catch (err) {
+        errorDiv.textContent = 'Failed to reach server';
+        errorDiv.style.display = 'block';
+      }
+    }
+  </script>
+</body>
+</html>
