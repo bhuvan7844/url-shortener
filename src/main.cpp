@@ -19,9 +19,17 @@ std::string extractUrlField(const std::string& body) {
     return body.substr(firstQuote + 1, secondQuote - firstQuote - 1);
 }
 
+#include <cstdlib>
+
 int main() {
     Encoder encoder;
-    PostgresStorage storage("dbname=urlshortener user=postgres password=postgres123 host=localhost");
+
+    const char* dbConnEnv = std::getenv("DB_CONN");
+    std::string connStr = dbConnEnv
+        ? std::string(dbConnEnv)
+        : "dbname=urlshortener user=postgres password=postgres123 host=localhost";
+
+    PostgresStorage storage(connStr);
 
     // seed nextId from the current max in DB so we never collide on restart
     std::atomic<int64_t> nextId{storage.getMaxId() + 1};
@@ -29,8 +37,10 @@ int main() {
 
     httplib::Server svr;
 
-    // serve static files from public/ — must be set before routes
-    svr.set_mount_point("/", "C:/Users/venka/OneDrive/Desktop/url-shortener/public");
+    // serve static files — use PUBLIC_DIR env var or default to ./public
+    const char* publicDir = std::getenv("PUBLIC_DIR");
+    std::string publicPath = publicDir ? std::string(publicDir) : "./public";
+    svr.set_mount_point("/", publicPath);
 
     svr.Post("/shorten", [&](const httplib::Request& req, httplib::Response& res) {
         std::string clientIp = req.remote_addr;
@@ -61,8 +71,10 @@ int main() {
         }
 
         std::ostringstream json;
+        const char* baseUrlEnv = std::getenv("BASE_URL");
+        std::string baseUrl = baseUrlEnv ? std::string(baseUrlEnv) : "http://localhost:8080";
         json << "{\"short_code\": \"" << code << "\", "
-             << "\"short_url\": \"http://localhost:8080/" << code << "\"}";
+             << "\"short_url\": \"" << baseUrl << "/" << code << "\"}";
 
         res.set_content(json.str(), "application/json");
     });
