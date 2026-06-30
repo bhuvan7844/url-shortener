@@ -11,6 +11,7 @@ RUN apt-get update && apt-get install -y \
     libpq-dev \
     curl \
     unzip \
+    git \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -22,9 +23,8 @@ COPY CMakeLists.txt .
 
 RUN mkdir build && cd build && \
     cmake .. -G Ninja \
-        -DCMAKE_BUILD_TYPE=Release \
-        -DCMAKE_CXX_FLAGS="-O2" && \
-    ninja url_shortener
+        -DCMAKE_BUILD_TYPE=Release && \
+    ninja url_shortener -v
 
 # ── Stage 2: Runtime ─────────────────────────────────────────────────────────
 FROM ubuntu:22.04
@@ -32,8 +32,8 @@ FROM ubuntu:22.04
 ENV DEBIAN_FRONTEND=noninteractive
 
 RUN apt-get update && apt-get install -y \
-    libpqxx-6.4 \
-    libpq5 \
+    libpqxx-dev \
+    libpq-dev \
     && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app

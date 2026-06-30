@@ -17,7 +17,7 @@ add_executable(url_shortener
 )
 
 target_include_directories(url_shortener PRIVATE include)
-target_link_libraries(url_shortener PRIVATE pqxx pq PostgreSQL::PostgreSQL Threads::Threads ws2_32 wsock32)
+target_link_libraries(url_shortener PRIVATE pqxx pq PostgreSQL::PostgreSQL Threads::Threads $<$<PLATFORM_ID:Windows>:ws2_32> $<$<PLATFORM_ID:Windows>:wsock32>)
 
 # ---------- Google Test ----------
 include(FetchContent)
