@@ -29,6 +29,9 @@ int main() {
 
     httplib::Server svr;
 
+    // serve static files from public/ — must be set before routes
+    svr.set_mount_point("/", "C:/Users/venka/OneDrive/Desktop/url-shortener/public");
+
     svr.Post("/shorten", [&](const httplib::Request& req, httplib::Response& res) {
         std::string clientIp = req.remote_addr;
         if (!limiter.allow(clientIp)) {
@@ -64,7 +67,8 @@ int main() {
         res.set_content(json.str(), "application/json");
     });
 
-    svr.Get(R"(/(\w+))", [&](const httplib::Request& req, httplib::Response& res) {
+    // redirect route — must come after static mount so /index.html still works
+    svr.Get(R"(/([\w]+))", [&](const httplib::Request& req, httplib::Response& res) {
         std::string code = req.matches[1];
         auto entry = storage.get(code);
 
@@ -79,7 +83,6 @@ int main() {
     });
 
     std::cout << "Server running on http://localhost:8080\n";
-    svr.set_mount_point("/", "../public");
     svr.listen("0.0.0.0", 8080);
 
     return 0;
