@@ -1,0 +1,13 @@
+services:
+  - type: web
+    name: url-shortener
+    runtime: docker
+    dockerfilePath: ./Dockerfile
+    plan: free
+    envVars:
+      - key: DB_CONN
+        sync: false
+      - key: BASE_URL
+        sync: false
+      - key: PUBLIC_DIR
+        value: ./public
