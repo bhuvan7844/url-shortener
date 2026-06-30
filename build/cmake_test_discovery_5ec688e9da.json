@@ -1,0 +1,79 @@
+{
+  "tests": 11,
+  "name": "AllTests",
+  "testsuites": [
+    {
+      "name": "RateLimiterTest",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "AllowsRequestsWithinBurstCapacity",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_ratelimiter.cpp",
+          "line": 6
+        },
+        {
+          "name": "RejectsRequestAfterBurstExhausted",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_ratelimiter.cpp",
+          "line": 13
+        },
+        {
+          "name": "RefillsAfterWaiting",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_ratelimiter.cpp",
+          "line": 20
+        },
+        {
+          "name": "DifferentClientsHaveSeparateBuckets",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_ratelimiter.cpp",
+          "line": 29
+        }
+      ]
+    },
+    {
+      "name": "StorageTest",
+      "tests": 4,
+      "testsuite": [
+        {
+          "name": "SaveAndGet",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_storage.cpp",
+          "line": 10
+        },
+        {
+          "name": "GetNonexistentReturnsNullopt",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_storage.cpp",
+          "line": 19
+        },
+        {
+          "name": "IncrementClicksIncreasesCount",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_storage.cpp",
+          "line": 24
+        },
+        {
+          "name": "IncrementClicksOnNonexistentReturnsFalse",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_storage.cpp",
+          "line": 36
+        }
+      ]
+    },
+    {
+      "name": "EncoderTest",
+      "tests": 3,
+      "testsuite": [
+        {
+          "name": "RoundTripBoundaryValues",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_encoder.cpp",
+          "line": 5
+        },
+        {
+          "name": "NoCollisionsInRange",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_encoder.cpp",
+          "line": 14
+        },
+        {
+          "name": "DecodeInvalidCharacterThrows",
+          "file": "C:\/Users\/venka\/OneDrive\/Desktop\/url-shortener\/tests\/test_encoder.cpp",
+          "line": 24
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+# ninja log v7
+8	802	8045054260163368	CMakeFiles/url_shortener.dir/src/Encoder.cpp.obj	c0bcc6325af039ca
+15	1042	8045054260243862	CMakeFiles/url_shortener.dir/src/InMemoryStorage.cpp.obj	a8b77272c6d5f37d
+36	11002	8045194504461492	CMakeFiles/url_shortener.dir/src/main.cpp.obj	e940774e6aadead6
+222	5365	8045190622761320	CMakeFiles/url_shortener.dir/src/PostgresStorage.cpp.obj	50d30c289bebcd62
+11002	11504	8045194614137054	url_shortener.exe	f356769f1baf0185
+37	2139	8045200661125846	build.ninja	eb2d85b00d723065
+37	2139	8045200660465422	C:/Users/venka/OneDrive/Desktop/url-shortener/build/cmake_install.cmake	eb2d85b00d723065
+42	1257	8045194504533301	CMakeFiles/url_shortener.dir/src/TokenBucketLimiter.cpp.obj	c502f6c1c2280442
+48	1104	8045200727370816	CMakeFiles/run_tests.dir/src/Encoder.cpp.obj	dc16f0c728d0409e
+26	7384	8045200727160165	_deps/googletest-build/googletest/CMakeFiles/gtest_main.dir/src/gtest_main.cc.obj	60bf179aa8d7ffd1
+1104	7535	8045200737949986	CMakeFiles/run_tests.dir/src/InMemoryStorage.cpp.obj	34eaeefc7d14ea58
+41	7801	8045200727302321	CMakeFiles/run_tests.dir/tests/test_ratelimiter.cpp.obj	3a691c5ed4b13a1a
+37	7915	8045200727262143	CMakeFiles/run_tests.dir/tests/test_storage.cpp.obj	1091ac2d31fbf420
+33	8017	8045200727221962	CMakeFiles/run_tests.dir/tests/test_encoder.cpp.obj	facf75ec371af245
+7385	9558	8045200800746068	CMakeFiles/run_tests.dir/src/TokenBucketLimiter.cpp.obj	cb4e1dcb602471e9
+21	17604	8045200727107910	_deps/googletest-build/googletest/CMakeFiles/gtest.dir/src/gtest-all.cc.obj	4f4d0425c079a3b1
+17605	18502	8045200902948010	lib/libgtest.a	39923bfd1f4a8f6e
+18502	18669	8045200911926025	lib/libgtest_main.a	f8d7cbf04690eb8f
+18669	20065	8045200927307577	run_tests.exe	64ba98084ea22dad
+18669	20065	8045200927307577	run_tests[1]_tests.cmake	64ba98084ea22dad
+18669	20065	8045200927307577	C:/Users/venka/OneDrive/Desktop/url-shortener/build/run_tests[1]_tests.cmake	64ba98084ea22dad

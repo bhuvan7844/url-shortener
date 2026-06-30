@@ -1,0 +1,21 @@
+# ninja log v7
+4	133	8045200615026622	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-mkdir	f4b532fad956203b
+4	133	8045200615026622	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-mkdir	f4b532fad956203b
+135	2332	8045200636880046	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download	4162575eaa065541
+135	2332	8045200636880046	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-download	4162575eaa065541
+2333	2474	8045200638449534	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-update	71fc5a91af521633
+2333	2474	8045200638449534	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-update	71fc5a91af521633
+2474	2597	8045200639695370	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-patch	bae5bd36cee5ea89
+2474	2597	8045200639695370	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-patch	bae5bd36cee5ea89
+2597	2717	8045200640890309	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-configure	88aab844b3bdb89f
+2597	2717	8045200640890309	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-configure	88aab844b3bdb89f
+2717	2833	8045200642056156	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-build	28b16bae171b4e44
+2717	2833	8045200642056156	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-build	28b16bae171b4e44
+2833	2970	8045200643411918	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-install	7493e5a57120d3f6
+2833	2970	8045200643411918	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-install	7493e5a57120d3f6
+2970	3077	8045200644491242	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-test	63865fd699f7f1a6
+2970	3077	8045200644491242	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-test	63865fd699f7f1a6
+3077	3215	8045200645887898	CMakeFiles/googletest-populate-complete	3e63d8aa2512503
+3077	3215	8045200645887898	googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-done	3e63d8aa2512503
+3077	3215	8045200645887898	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/CMakeFiles/googletest-populate-complete	3e63d8aa2512503
+3077	3215	8045200645887898	C:/Users/venka/OneDrive/Desktop/url-shortener/build/_deps/googletest-subbuild/googletest-populate-prefix/src/googletest-populate-stamp/googletest-populate-done	3e63d8aa2512503

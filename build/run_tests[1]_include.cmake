@@ -1,0 +1,5 @@
+if(EXISTS "C:/Users/venka/OneDrive/Desktop/url-shortener/build/run_tests[1]_tests.cmake")
+  include("C:/Users/venka/OneDrive/Desktop/url-shortener/build/run_tests[1]_tests.cmake")
+else()
+  add_test(run_tests_NOT_BUILT run_tests_NOT_BUILT)
+endif()
