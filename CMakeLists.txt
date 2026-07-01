@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.16)
 project(url_shortener)
 
-set(CMAKE_CXX_STANDARD 17)
+set(CMAKE_CXX_STANDARD 20)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
 find_package(Threads REQUIRED)
@@ -16,8 +16,12 @@ add_executable(url_shortener
     src/TokenBucketLimiter.cpp
 )
 
-target_include_directories(url_shortener PRIVATE include)
-target_link_libraries(url_shortener PRIVATE pqxx pq PostgreSQL::PostgreSQL Threads::Threads ws2_32 wsock32)
+target_include_directories(url_shortener PRIVATE include /opt/homebrew/opt/libpqxx/include /opt/homebrew/opt/postgresql@14/include)
+target_link_directories(url_shortener PRIVATE /opt/homebrew/opt/libpqxx/lib /opt/homebrew/lib/postgresql@14)
+target_link_libraries(url_shortener PRIVATE pqxx pq PostgreSQL::PostgreSQL Threads::Threads)
+if(WIN32)
+    target_link_libraries(url_shortener PRIVATE ws2_32 wsock32)
+endif()
 
 # ---------- Google Test ----------
 include(FetchContent)
