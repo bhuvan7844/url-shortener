@@ -6,6 +6,7 @@
 #include "PostgresStorage.h"
 #include "TokenBucketLimiter.h"
 #include <iostream>
+#include <fstream>
 #include <atomic>
 #include <sstream>
 
@@ -37,10 +38,24 @@ int main() {
 
     httplib::Server svr;
 
-    // serve static files — use PUBLIC_DIR env var or default to ./public
+    // serve index.html explicitly at / and /index.html
     const char* publicDir = std::getenv("PUBLIC_DIR");
     std::string publicPath = publicDir ? std::string(publicDir) : "./public";
-    svr.set_mount_point("/", publicPath);
+    std::string indexPath = publicPath + "/index.html";
+
+    svr.Get("/", [&](const httplib::Request&, httplib::Response& res) {
+        std::ifstream f(indexPath);
+        if (!f) { res.status = 404; return; }
+        std::string html((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
+        res.set_content(html, "text/html");
+    });
+
+    svr.Get("/index.html", [&](const httplib::Request&, httplib::Response& res) {
+        std::ifstream f(indexPath);
+        if (!f) { res.status = 404; return; }
+        std::string html((std::istreambuf_iterator<char>(f)), std::istreambuf_iterator<char>());
+        res.set_content(html, "text/html");
+    });
 
     svr.Post("/shorten", [&](const httplib::Request& req, httplib::Response& res) {
         std::string clientIp = req.remote_addr;
@@ -52,10 +67,13 @@ int main() {
 
         std::string longUrl = extractUrlField(req.body);
 
-        if (longUrl.empty() || longUrl.find("http") != 0) {
+        if (longUrl.empty()) {
             res.status = 400;
             res.set_content(R"({"error": "invalid or missing url"})", "application/json");
             return;
+        }
+        if (longUrl.find("http") != 0) {
+            longUrl = "https://" + longUrl;
         }
 
         int64_t id = nextId++;
