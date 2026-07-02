@@ -1,13 +1,13 @@
 #include "PostgresStorage.h"
 #include <iostream>
 
-PostgresStorage::PostgresStorage(const std::string& connString) {
-    conn = std::make_unique<pqxx::connection>(connString);
-}
+PostgresStorage::PostgresStorage(const std::string& connString)
+    : connStr(connString) {}
 
 bool PostgresStorage::save(const URLEntry& entry) {
     try {
-        pqxx::work txn(*conn);
+        pqxx::connection c(connStr);
+        pqxx::work txn(c);
         txn.exec(
             "INSERT INTO urls (short_code, long_url) VALUES (" +
             txn.quote(entry.shortCode) + ", " +
@@ -23,7 +23,8 @@ bool PostgresStorage::save(const URLEntry& entry) {
 
 std::optional<URLEntry> PostgresStorage::get(const std::string& code) {
     try {
-        pqxx::work txn(*conn);
+        pqxx::connection c(connStr);
+        pqxx::work txn(c);
         auto result = txn.exec(
             "SELECT short_code, long_url, clicks FROM urls WHERE short_code = " +
             txn.quote(code)
@@ -44,7 +45,8 @@ std::optional<URLEntry> PostgresStorage::get(const std::string& code) {
 
 bool PostgresStorage::incrementClicks(const std::string& code) {
     try {
-        pqxx::work txn(*conn);
+        pqxx::connection c(connStr);
+        pqxx::work txn(c);
         auto result = txn.exec(
             "UPDATE urls SET clicks = clicks + 1 WHERE short_code = " +
             txn.quote(code)
@@ -59,7 +61,8 @@ bool PostgresStorage::incrementClicks(const std::string& code) {
 
 int64_t PostgresStorage::getMaxId() {
     try {
-        pqxx::work txn(*conn);
+        pqxx::connection c(connStr);
+        pqxx::work txn(c);
         auto result = txn.exec("SELECT COALESCE(MAX(id), 0) FROM urls");
         return result[0][0].as<int64_t>();
     } catch (const std::exception& e) {

@@ -1,7 +1,6 @@
 #pragma once
 #include "Storage.h"
 #include <pqxx/pqxx>
-#include <memory>
 
 class PostgresStorage : public Storage {
 public:
@@ -13,5 +12,5 @@ public:
     int64_t getMaxId();
 
 private:
-    std::unique_ptr<pqxx::connection> conn;
+    std::string connStr;
 };
