@@ -42,6 +42,7 @@ int main() {
     const char* publicDir = std::getenv("PUBLIC_DIR");
     std::string publicPath = publicDir ? std::string(publicDir) : "./public";
     std::string indexPath = publicPath + "/index.html";
+    std::cout << "Serving index.html from: " << indexPath << "\n";
 
     svr.Get("/", [&](const httplib::Request&, httplib::Response& res) {
         std::ifstream f(indexPath);
